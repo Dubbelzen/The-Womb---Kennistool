@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Womb — Gids bij casuïstiek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --zand:   #D9B99B;
+  --wit:    #FAF5EF;
+  --terra:  #C4785A;
+  --salmon: #E8956D;
+  --blush:  #EAC4B3;
+  --donker: #3D3650;
+  --font-title: 'Bebas Neue', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--wit);
+  color: var(--donker);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: var(--zand);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--blush);
+}
+.header-title {
+  font-family: var(--font-title);
+  font-size: 34px;
+  color: var(--terra);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.header-sub {
+  font-size: 11px;
+  color: var(--donker);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  padding-top: 4px;
+}
+
+/* Main */
+.main { max-width: 780px; margin: 0 auto; padding: 36px 20px; }
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+h1 span { color: var(--terra); }
+
+.intro {
+  font-size: 14px;
+  color: #8B7D6B;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+
+/* Input card */
+.card {
+  background: white;
+  border: 1px solid var(--blush);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(61,54,80,0.06);
+  margin-bottom: 20px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra);
+  display: block;
+  margin-bottom: 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  border: 1.5px solid var(--blush);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--donker);
+  background: var(--wit);
+  resize: vertical;
+  line-height: 1.6;
+  outline: none;
+}
+textarea:focus { border-color: var(--terra); }
+
+.cat-label {
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8B7D6B;
+}
+
+.cats { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
+
+.cat-pill {
+  background: var(--wit);
+  border: 1px solid var(--blush);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--donker);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cat-pill:hover, .cat-pill.active {
+  background: var(--terra);
+  border-color: var(--terra);
+  color: white;
+}
+
+.search-btn {
+  width: 100%;
+  background: var(--terra);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+}
+.search-btn:hover { background: var(--salmon); }
+.search-btn:disabled { background: var(--salmon); cursor: not-allowed; }
+
+.error-box {
+  display: none;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--terra);
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--blush);
+  background: var(--wit);
+}
+
+/* Results */
+.results { display: none; }
+
+.result-title {
+  font-family: var(--font-title);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+  color: var(--donker);
+}
+.result-sub { font-size: 12px; color: #8B7D6B; margin-bottom: 16px; }
+
+.analyse-box {
+  background: rgba(234,196,179,0.25);
+  border: 1px solid var(--blush);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+.analyse-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 6px;
+}
+.analyse-text { font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+.keywords { display: flex; flex-wrap: wrap; gap: 5px; }
+.kw-tag {
+  background: white;
+  border: 1px solid var(--blush);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--terra);
+  font-weight: 500;
+}
+
+.section-label { margin: 18px 0 4px; }
+.section-label strong {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--donker);
+}
+.section-label small {
+  display: block;
+  font-size: 12px;
+  color: #8B7D6B;
+  margin-top: 2px;
+  font-weight: 300;
+}
+
+.aanbevolen-wrap {
+  background: rgba(217,185,155,0.18);
+  border: 1px solid var(--zand);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+.src-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 11px 13px;
+  border-radius: 8px;
+  margin-bottom: 7px;
+  border: 1px solid var(--blush);
+  background: white;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+}
+.src-card:hover { border-color: var(--zand); background: var(--wit); }
+.src-icon { font-size: 18px; flex-shrink: 0; width: 28px; text-align: center; padding-top: 1px; }
+.src-name { font-size: 13px; font-weight: 500; color: var(--donker); margin-bottom: 2px; }
+.src-desc { font-size: 12px; color: #8B7D6B; line-height: 1.4; }
+.src-link { font-size: 12px; color: var(--terra); font-weight: 500; margin-top: 3px; }
+
+.vragen-box {
+  background: rgba(217,185,155,0.15);
+  border: 1px solid var(--zand);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+.vragen-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--donker);
+  margin-bottom: 10px;
+}
+.vraag-item {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--blush);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.vraag-item:last-child { border-bottom: none; }
+.vraag-dot { color: var(--salmon); flex-shrink: 0; }
+
+.reset-btn {
+  margin-top: 16px;
+  background: none;
+  border: 1px solid var(--blush);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #8B7D6B;
+  cursor: pointer;
+}
+.reset-btn:hover { border-color: var(--zand); color: var(--donker); }
+
+footer {
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 11px;
+  color: #8B7D6B;
+  border-top: 1px solid var(--blush);
+  margin-top: 32px;
+  background: rgba(217,185,155,0.18);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">THE WOMB</div>
+  <div class="header-sub">Gids bij casuïstiek</div>
+</div>
+
+<div class="main">
+  <h1>ZOEK KENNIS VOOR JOUW <span>CASUS</span></h1>
+  <p class="intro">Beschrijf de situatie van je cliënt. De navigator verwijst naar officiële richtlijnen, verdiepingsbronnen van erkende experts én specifieke bronnen uit de Dubbel Zen cursusomgeving.</p>
+
+  <!-- Input -->
+  <div class="card" id="input-section">
+    <label class="field-label">Beschrijf de casus</label>
+    <textarea id="casus" placeholder="Fluxus in voorgeschiedenis..."></textarea>
+    <div class="cat-label">Of kies een categorie</div>
+    <div class="cats" id="cats"></div>
+    <button class="search-btn" id="search-btn" onclick="doSearch()">Zoek betrouwbare bronnen</button>
+    <div class="error-box" id="error-box"></div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="result-title">BRONNEN VOOR JOUW CASUS</div>
+    <div class="result-sub" id="result-sub"></div>
+
+    <div class="analyse-box">
+      <div class="analyse-label">Analyse</div>
+      <div class="analyse-text" id="analyse-text"></div>
+      <div class="keywords" id="keywords"></div>
+    </div>
+
+    <div id="aanbevolen-section" style="display:none">
+      <div class="section-label">
+        <strong>Aanbevolen voor deze casus</strong>
+        <small>Geselecteerde bronnen uit de Dubbel Zen cursusomgeving</small>
+      </div>
+      <div class="aanbevolen-wrap" id="aanbevolen-cards"></div>
+    </div>
+
+    <div class="section-label">
+      <strong>Richtlijnen & wetenschap</strong>
+      <small>Wetenschappelijke databases en officiële beroepsrichtlijnen</small>
+    </div>
+    <div id="richtlijnen-cards"></div>
+
+    <div class="section-label">
+      <strong>Verdieping & perspectief</strong>
+      <small>Erkende verloskundige experts — waardevolle aanvulling, geen primaire bronnen</small>
+    </div>
+    <div id="verdieping-cards"></div>
+
+    <div class="vragen-box">
+      <div class="vragen-label">Vragen voor je cliënt</div>
+      <div id="vragen-list"></div>
+    </div>
+
+    <button class="reset-btn" onclick="reset()">← Nieuwe casus invoeren</button>
+  </div>
+</div>
+
+<footer>
+  The Womb · Gids bij casuïstiek v3.2<br>
+  Bronnen gebaseerd op de Dubbel Zen cursusomgeving. Vervangt geen medisch advies.
+</footer>
+
+<script>
+const C = { zand:"#D9B99B", terra:"#C4785A", salmon:"#E8956D", blush:"#EAC4B3", donker:"#3D3650", wit:"#FAF5EF" };
+
+const RICHTLIJNEN = [
+  { name:"PubMed", icon:"🔬", desc:"Wetenschappelijke studies en reviews. Grootste medische database.", url:(en,nl)=>"https://pubmed.ncbi.nlm.nih.gov/?term="+encodeURIComponent(en[0]||"") },
+  { name:"Cochrane Library", icon:"📊", desc:"Systematische reviews van de hoogste bewijskwaliteit.", url:(en,nl)=>"https://www.cochranelibrary.com/search?q="+encodeURIComponent(en[0]||"") },
+  { name:"Richtlijnendatabase.nl", icon:"📋", desc:"Nederlandse medische richtlijnen — NVOG, NVA en andere beroepsverenigingen.", url:(en,nl)=>"https://richtlijnendatabase.nl/zoeken?q="+encodeURIComponent(nl[0]||"") },
+  { name:"KNOV", icon:"🇳🇱", desc:"Richtlijnen en factsheets voor verloskundigen.", url:(en,nl)=>"https://www.google.com/search?q=site:knov.nl+"+encodeURIComponent(nl[0]||"") },
+  { name:"NVOG", icon:"🏥", desc:"Richtlijnen Nederlandse gynaecologen.", url:(en,nl)=>"https://www.google.com/search?q=site:nvog.nl+"+encodeURIComponent(nl[0]||"") },
+  { name:"NICE – Maternity", icon:"🇬🇧", desc:"Britse richtlijnen, gefilterd op zwangerschap en bevalling.", url:(en,nl)=>"https://www.nice.org.uk/search#q="+encodeURIComponent(en[0]||"")+"&nai=Maternity+and+neonatal&sp=on" },
+  { name:"WHO", icon:"🌍", desc:"Wereldwijde richtlijnen van de Wereldgezondheidsorganisatie.", url:(en,nl)=>"https://www.who.int/search?query="+encodeURIComponent(en[0]||"") },
+];
+
+const VERDIEPING = [
+  { name:"Vraag de Vroedvrouw", icon:"💬", desc:"Nederlandstalige samenvattingen van verloskundige casuïstiek. Gratis leesbaar.", url:(en,nl)=>"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+"+encodeURIComponent(nl[0]||"") },
+  { name:"Rachel Reed", icon:"✍️", desc:"Australische verloskundige-onderzoeker. Fysiologie en praktijk.", url:(en,nl)=>"https://www.google.com/search?q=site:rachelreed.website+"+encodeURIComponent(en[0]||"") },
+  { name:"Sara Wickham", icon:"📖", desc:"Britse vroedvrouw en auteur. Kritisch en evidence-based.", url:(en,nl)=>"https://www.google.com/search?q=site:sarawickham.com+"+encodeURIComponent(en[0]||"") },
+  { name:"Evidence Based Birth", icon:"🧪", desc:"Amerikaanse database met vertaald wetenschappelijk bewijs.", url:(en,nl)=>"https://www.google.com/search?q=site:evidencebasedbirth.com+"+encodeURIComponent(en[0]||"") },
+];
+
+const CATEGORIE_BRONNEN = {
+  "serotiniteit":[{name:"Podcast Verloskees – Serotiniteit",icon:"🎙️",desc:"Aflevering over serotiniteit. Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20serotiniteit"}],
+  "groeivertraging":[{name:"tekleinebaby.nl",icon:"👶",desc:"Gespecialiseerde site over SGA/FGR met de nieuwste inzichten.",url:"https://www.tekleinebaby.nl"},{name:"Podcast Verloskees – Kleine baby",icon:"🎙️",desc:"Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20kleine%20baby"}],
+  "sga":[{name:"tekleinebaby.nl",icon:"👶",desc:"Gespecialiseerde site over SGA/FGR.",url:"https://www.tekleinebaby.nl"}],
+  "stuitligging":[{name:"Spinning Babies – Daily Activities",icon:"🤸",desc:"Oefeningen voor een goede babypositionering.",url:"https://spinningbabies.com/learn-more/techniques/three-sisters-of-balance/"},{name:"Spinning Babies – Breech ebook",icon:"📗",desc:"Helping your breech baby turn — gratis ebook.",url:"https://spinningbabies.com/product/helping-your-breech-baby-to-turn/"},{name:"Birth Matters – Blog stuitligging",icon:"📝",desc:"Informatief blog over bevallen in stuitligging.",url:"https://www.birthmatters.nl"},{name:"Podcast Verloskees – Stuit",icon:"🎙️",desc:"Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20stuitligging"}],
+  "diabetes":[{name:"Sara Wickham – Gestational Diabetes",icon:"📖",desc:"Beyond the Label — kritische beschouwing van zwangerschapsdiabetes.",url:"https://www.sarawickham.com/?s=gestational+diabetes"},{name:"Rachel Reed – Gestational Diabetes",icon:"✍️",desc:"Nuanced klinisch perspectief op GDM.",url:"https://www.google.com/search?q=site:rachelreed.website+gestational+diabetes"},{name:"Richtlijnendatabase – Diabetes",icon:"📋",desc:"Nederlandse richtlijn bij diabetes en zwangerschap.",url:"https://richtlijnendatabase.nl/zoeken?q=diabetes+zwangerschap"}],
+  "preeclampsie":[{name:"Richtlijnendatabase – Pre-eclampsie",icon:"📋",desc:"Officiële richtlijn pre-eclampsie en HELLP.",url:"https://richtlijnendatabase.nl/zoeken?q=pre-eclampsie"}],
+  "hypertensie":[{name:"Richtlijnendatabase – Pre-eclampsie",icon:"📋",desc:"Officiële richtlijn pre-eclampsie en HELLP.",url:"https://richtlijnendatabase.nl/zoeken?q=pre-eclampsie"}],
+  "vbac":[{name:"Podcast Verloskees – VBAC",icon:"🎙️",desc:"Met gynaecoloog Jan Veerbeek over bevallen na keizersnede.",url:"https://open.spotify.com/search/verloskees%20VBAC"}],
+  "littekenuterus":[{name:"Podcast Verloskees – VBAC",icon:"🎙️",desc:"Met gynaecoloog Jan Veerbeek over bevallen na keizersnede.",url:"https://open.spotify.com/search/verloskees%20VBAC"}],
+  "fluxus":[{name:"Rachel Reed – PPH & actief leiden",icon:"✍️",desc:"Actief leiden en de kans op herhaalde fluxus.",url:"https://www.rachelreed.website/blog?category=placenta"},{name:"Sara Wickham – Recurrent PPH",icon:"📖",desc:"What's the chance of having another PPH?",url:"https://www.sarawickham.com/?s=PPH"}],
+  "bloedverlies":[{name:"Rachel Reed – PPH",icon:"✍️",desc:"Actief leiden en de kans op herhaalde fluxus.",url:"https://www.rachelreed.website/blog?category=placenta"},{name:"Sara Wickham – PPH",icon:"📖",desc:"What's the chance of having another PPH?",url:"https://www.sarawickham.com/?s=PPH"}],
+  "meconium":[{name:"Vraag de Vroedvrouw – Meconium",icon:"💬",desc:"Overzichtsartikel meconiumhoudend vruchtwater.",url:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+meconium"},{name:"Richtlijnendatabase – Meconium",icon:"📋",desc:"NVOG-richtlijn meconiumhoudend vruchtwater.",url:"https://richtlijnendatabase.nl/zoeken?q=meconium"},{name:"Podcast Verloskees – Meconium",icon:"🎙️",desc:"Kun je thuisbevallen met meconiumhoudend vruchtwater?",url:"https://open.spotify.com/search/verloskees%20meconium"}],
+  "inductie":[{name:"Richtlijnendatabase – Inleiden",icon:"📋",desc:"NVOG-richtlijn inleiden van de bevalling.",url:"https://richtlijnendatabase.nl/zoeken?q=inleiden"},{name:"Cochrane – Amniotomy",icon:"📊",desc:"Amniotomie voor het verkorten van de baring.",url:"https://www.cochranelibrary.com/search?q=amniotomy+spontaneous+labour"},{name:"Podcast Verloskees – Inleiden",icon:"🎙️",desc:"Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20inleiden"}],
+  "inleiden":[{name:"Richtlijnendatabase – Inleiden",icon:"📋",desc:"NVOG-richtlijn inleiden van de bevalling.",url:"https://richtlijnendatabase.nl/zoeken?q=inleiden"},{name:"Podcast Verloskees – Inleiden",icon:"🎙️",desc:"Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20inleiden"}],
+  "gebroken vliezen":[{name:"Vraag de Vroedvrouw – Gebroken vliezen",icon:"💬",desc:"Van Egmond & Van Dijk (2022/2025): langdurig gebroken vliezen.",url:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+gebroken+vliezen"}],
+  "pijnstilling":[{name:"Vraag de Vroedvrouw – Pijnstilling",icon:"💬",desc:"Overzicht medicamenteuze pijnstilling.",url:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+pijnstilling"},{name:"Richtlijnendatabase – Epiduraal",icon:"📋",desc:"NVA-richtlijn epiduraal.",url:"https://richtlijnendatabase.nl/zoeken?q=epiduraal"}],
+  "obesitas":[{name:"Vraag de Vroedvrouw – Hoog BMI",icon:"💬",desc:"Verbeek & Van Dijk: Dik en zwanger.",url:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+obesitas"},{name:"KNOV – Factsheet Obesitas",icon:"🇳🇱",desc:"Verloskundige zorg bij obesitas (2023).",url:"https://www.knov.nl/?s=obesitas"}],
+  "cholestase":[{name:"Sara Wickham – Cholestase",icon:"📖",desc:"What we know and don't know.",url:"https://www.sarawickham.com/?s=cholestasis"},{name:"Rachel Reed – Cholestase",icon:"✍️",desc:"Beyond the label: understanding cholestasis.",url:"https://www.google.com/search?q=site:rachelreed.website+cholestasis"},{name:"Vraag de Vroedvrouw – Cholestase",icon:"💬",desc:"Margot van Dijk (2022/2026).",url:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+cholestase"},{name:"Richtlijnendatabase – Cholestase",icon:"📋",desc:"NVOG-richtlijn zwangerschapscholestase.",url:"https://richtlijnendatabase.nl/zoeken?q=cholestase"}],
+  "serotiniteit":[{name:"Podcast Verloskees – Serotiniteit",icon:"🎙️",desc:"Aflevering met Rebekka en Wessel. Luistertip uit de Dubbel Zen cursusomgeving.",url:"https://open.spotify.com/search/verloskees%20serotiniteit"}],
+};
+
+const CATEGORIES = [
+  "Fluxus / bloedverlies","Placentaproblemen","Nageboortetijdperk","Serotiniteit",
+  "VBAC / littekenuterus","Groeivertraging / SGA","Preeclampsie / hypertensie",
+  "GBS / infectie","Meerlingzwangerschap","Stuitligging","Vroeggeboorte",
+  "Navelstrengprolaps","Psychisch / trauma","Diabetes / GDM",
+  "AROM / vliezen breken","Inductie","Meconium vruchtwater","Bloedgroep / Rh",
+  "Langdurig gebroken vliezen","Medische pijnstilling","Hoog BMI / obesitas",
+  "Leeftijd moeder >40","Cholestase","Kunstverlossing"
+];
+
+// Render categorie-pills
+const catsEl = document.getElementById("cats");
+CATEGORIES.forEach(cat => {
+  const b = document.createElement("button");
+  b.className = "cat-pill";
+  b.textContent = cat;
+  b.onclick = () => {
+    b.classList.toggle("active");
+    const ta = document.getElementById("casus");
+    if (b.classList.contains("active")) {
+      ta.value = ta.value ? ta.value.trimEnd() + ", " + cat.toLowerCase() : cat;
+    }
+  };
+  catsEl.appendChild(b);
+});
+
+function makeCard(name, icon, desc, href) {
+  const a = document.createElement("a");
+  a.className = "src-card";
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.innerHTML = `<div class="src-icon">${icon}</div><div><div class="src-name">${name}</div><div class="src-desc">${desc}</div><div class="src-link">Direct zoeken →</div></div>`;
+  return a;
+}
+
+function getExtras(casus) {
+  const lower = casus.toLowerCase();
+  const seen = new Set();
+  const extras = [];
+  Object.entries(CATEGORIE_BRONNEN).forEach(([key, bronnen]) => {
+    if (lower.includes(key)) {
+      bronnen.forEach(b => {
+        if (!seen.has(b.name)) { seen.add(b.name); extras.push(b); }
+      });
+    }
+  });
+  return extras;
+}
+
+async function doSearch() {
+  const casus = document.getElementById("casus").value.trim();
+  const errEl = document.getElementById("error-box");
+  if (!casus) { errEl.textContent = "Beschrijf eerst de casus."; errEl.style.display = "block"; return; }
+  errEl.style.display = "none";
+  const btn = document.getElementById("search-btn");
+  btn.textContent = "Analyseren..."; btn.disabled = true;
+
+  try {
+    const prompt = [
+      "Je bent verloskundige expert. Analyseer de casus voor een doula-student.",
+      "Geef ALLEEN geldige JSON terug, geen uitleg, geen markdown.",
+      "Zoektermen: maximaal 2 woorden, medisch precies. Gebruik de juiste vakterm per taal: fluxus=postpartum hemorrhage, serotiniteit=post-term pregnancy, stuitligging=breech presentation, gebroken vliezen=prelabour rupture membranes, meconium=meconium stained liquor, inleiden=induction of labour, keizersnede=caesarean section, VBAC=vaginal birth after caesarean, pre-eclampsie=pre-eclampsia, groeivertraging=fetal growth restriction, zwangerschapsdiabetes=gestational diabetes, cholestase=intrahepatic cholestasis, GBS=group B streptococcus, nageboortetijdperk=third stage labour, meerling=twin pregnancy, obesitas=obesity pregnancy, epiduraal=epidural analgesia, kunstverlossing=assisted vaginal delivery, fluxus voorgeschiedenis=recurrent postpartum hemorrhage.",
+      "", 'Casus: "' + casus + '"', "",
+      "Exact dit formaat:",
+      '{"samenvatting":"...","zoektermen_nl":["term1","term2"],"zoektermen_en":["term1","term2"],"vragen":["v1","v2","v3","v4"]}'
+    ].join("\n");
+
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const text = data.content?.find(b => b.type === "text")?.text || "";
+    const match = text.replace(/```json|```/g, "").trim().match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("Geen JSON gevonden");
+    const d = JSON.parse(match[0]);
+    if (!d.samenvatting) throw new Error("Onvolledige response");
+
+    const en = d.zoektermen_en || [];
+    const nl = d.zoektermen_nl || [];
+
+    document.getElementById("input-section").style.display = "none";
+    document.getElementById("results").style.display = "block";
+    document.getElementById("result-sub").textContent = 'Op basis van: "' + casus.substring(0,70) + (casus.length>70?"...":"") + '"';
+    document.getElementById("analyse-text").textContent = d.samenvatting;
+
+    const kwEl = document.getElementById("keywords");
+    kwEl.innerHTML = "";
+    [...en, ...nl].forEach(t => { const s = document.createElement("span"); s.className = "kw-tag"; s.textContent = t; kwEl.appendChild(s); });
+
+    // Aanbevolen
+    const extras = getExtras(casus);
+    const aanbSec = document.getElementById("aanbevolen-section");
+    const aanbCards = document.getElementById("aanbevolen-cards");
+    aanbCards.innerHTML = "";
+    if (extras.length > 0) {
+      aanbSec.style.display = "block";
+      extras.forEach(b => aanbCards.appendChild(makeCard(b.name, b.icon, b.desc, b.url)));
+    } else {
+      aanbSec.style.display = "none";
+    }
+
+    // Richtlijnen
+    const rlEl = document.getElementById("richtlijnen-cards");
+    rlEl.innerHTML = "";
+    RICHTLIJNEN.forEach(s => rlEl.appendChild(makeCard(s.name, s.icon, s.desc, s.url(en, nl))));
+
+    // Verdieping
+    const vdEl = document.getElementById("verdieping-cards");
+    vdEl.innerHTML = "";
+    VERDIEPING.forEach(s => vdEl.appendChild(makeCard(s.name, s.icon, s.desc, s.url(en, nl))));
+
+    // Vragen
+    const vrEl = document.getElementById("vragen-list");
+    vrEl.innerHTML = "";
+    (d.vragen || []).forEach((v, i) => {
+      const div = document.createElement("div");
+      div.className = "vraag-item";
+      div.innerHTML = `<span class="vraag-dot">○</span><span>${v}</span>`;
+      if (i < d.vragen.length - 1) div.style.borderBottom = "1px solid " + C.blush;
+      else div.style.borderBottom = "none";
+      vrEl.appendChild(div);
+    });
+
+  } catch(e) {
+    errEl.textContent = "Fout: " + e.message + ". Probeer opnieuw.";
+    errEl.style.display = "block";
+  } finally {
+    btn.textContent = "Zoek betrouwbare bronnen"; btn.disabled = false;
+  }
+}
+
+function reset() {
+  document.getElementById("input-section").style.display = "block";
+  document.getElementById("results").style.display = "none";
+  document.getElementById("casus").value = "";
+  document.querySelectorAll(".cat-pill").forEach(b => b.classList.remove("active"));
+}
+</script>
+</body>
+</html>
