@@ -98,40 +98,45 @@ footer { text-align: center; padding: 24px 20px; font-size: 11px; color: #8B7D6B
 
 <script>
 const VERTALINGEN = {
-  "fluxus": { nl: "fluxus", en: "postpartum hemorrhage" },
-  "bloedverlies": { nl: "fluxus", en: "postpartum hemorrhage" },
-  "serotiniteit": { nl: "serotiniteit", en: "post-term pregnancy" },
-  "overtijd": { nl: "serotiniteit", en: "post-term pregnancy" },
-  "stuitligging": { nl: "stuitligging", en: "breech presentation" },
-  "gebroken vliezen": { nl: "gebroken vliezen", en: "prelabour rupture membranes" },
-  "meconium": { nl: "meconium vruchtwater", en: "meconium stained liquor" },
-  "inleiden": { nl: "inleiden", en: "induction of labour" },
-  "inductie": { nl: "inleiden", en: "induction of labour" },
-  "keizersnede": { nl: "keizersnede", en: "caesarean section" },
-  "vbac": { nl: "VBAC", en: "vaginal birth after caesarean" },
-  "littekenuterus": { nl: "VBAC", en: "vaginal birth after caesarean" },
-  "pre-eclampsie": { nl: "pre-eclampsie", en: "pre-eclampsia" },
-  "preeclampsie": { nl: "pre-eclampsie", en: "pre-eclampsia" },
-  "hypertensie": { nl: "pre-eclampsie", en: "pre-eclampsia" },
-  "groeivertraging": { nl: "groeivertraging", en: "fetal growth restriction" },
-  "sga": { nl: "groeivertraging", en: "fetal growth restriction" },
-  "diabetes": { nl: "zwangerschapsdiabetes", en: "gestational diabetes" },
-  "gdm": { nl: "zwangerschapsdiabetes", en: "gestational diabetes" },
-  "cholestase": { nl: "cholestase", en: "intrahepatic cholestasis" },
-  "gbs": { nl: "GBS", en: "group B streptococcus" },
-  "nageboortetijdperk": { nl: "nageboortetijdperk", en: "third stage labour" },
-  "placenta": { nl: "placenta retentio", en: "retained placenta" },
-  "meerling": { nl: "meerlingzwangerschap", en: "twin pregnancy" },
-  "tweeling": { nl: "meerlingzwangerschap", en: "twin pregnancy" },
-  "obesitas": { nl: "obesitas zwangerschap", en: "obesity pregnancy" },
-  "bmi": { nl: "obesitas zwangerschap", en: "obesity pregnancy" },
-  "epiduraal": { nl: "epiduraal", en: "epidural analgesia" },
-  "pijnstilling": { nl: "epiduraal", en: "epidural analgesia" },
-  "kunstverlossing": { nl: "kunstverlossing", en: "assisted vaginal delivery" },
-  "vroeggeboorte": { nl: "vroeggeboorte", en: "preterm birth" },
-  "navelstreng": { nl: "navelstrengprolaps", en: "cord prolapse" },
-  "trauma": { nl: "bevallingstrauma", en: "birth trauma" },
-  "psychisch": { nl: "bevallingstrauma", en: "birth trauma" },
+  "fluxus":          { nl: "fluxus",              en: "postpartum hemorrhage",       blog: "PPH" },
+  "bloedverlies":    { nl: "fluxus",              en: "postpartum hemorrhage",       blog: "PPH" },
+  "serotiniteit":    { nl: "serotiniteit",        en: "post-term pregnancy",         blog: "postterm" },
+  "overtijd":        { nl: "serotiniteit",        en: "post-term pregnancy",         blog: "postterm" },
+  "stuitligging":    { nl: "stuitligging",        en: "breech presentation",         blog: "breech" },
+  "gebroken vliezen":{ nl: "gebroken vliezen",   en: "prelabour rupture membranes", blog: "rupture membranes" },
+  "meconium":        { nl: "meconium vruchtwater",en: "meconium stained liquor",     blog: "meconium" },
+  "inleiden":        { nl: "inleiden",            en: "induction of labour",         blog: "induction" },
+  "inductie":        { nl: "inleiden",            en: "induction of labour",         blog: "induction" },
+  "keizersnede":     { nl: "keizersnede",         en: "caesarean section",           blog: "caesarean" },
+  "vbac":            { nl: "VBAC",                en: "vaginal birth after caesarean",blog: "VBAC" },
+  "littekenuterus":  { nl: "VBAC",                en: "vaginal birth after caesarean",blog: "VBAC" },
+  "pre-eclampsie":   { nl: "pre-eclampsie",       en: "pre-eclampsia",               blog: "pre-eclampsia" },
+  "preeclampsie":    { nl: "pre-eclampsie",       en: "pre-eclampsia",               blog: "pre-eclampsia" },
+  "hypertensie":     { nl: "pre-eclampsie",       en: "pre-eclampsia",               blog: "pre-eclampsia" },
+  "groeivertraging": { nl: "groeivertraging",     en: "fetal growth restriction",    blog: "growth restriction" },
+  "sga":             { nl: "groeivertraging",     en: "fetal growth restriction",    blog: "SGA" },
+  "diabetes":        { nl: "zwangerschapsdiabetes",en: "gestational diabetes",       blog: "gestational diabetes" },
+  "gdm":             { nl: "zwangerschapsdiabetes",en: "gestational diabetes",       blog: "gestational diabetes" },
+  "cholestase":      { nl: "cholestase",          en: "intrahepatic cholestasis",    blog: "cholestasis" },
+  "gbs":             { nl: "GBS",                 en: "group B streptococcus",       blog: "GBS" },
+  "nageboortetijdperk":{ nl: "nageboortetijdperk",en: "third stage labour",          blog: "third stage" },
+  "placenta":        { nl: "placenta retentio",   en: "retained placenta",           blog: "placenta" },
+  "meerling":        { nl: "meerlingzwangerschap",en: "twin pregnancy",              blog: "twins" },
+  "tweeling":        { nl: "meerlingzwangerschap",en: "twin pregnancy",              blog: "twins" },
+  "obesitas":        { nl: "obesitas zwangerschap",en: "obesity pregnancy",          blog: "obesity" },
+  "bmi":             { nl: "obesitas zwangerschap",en: "obesity pregnancy",          blog: "obesity" },
+  "epiduraal":       { nl: "epiduraal",           en: "epidural analgesia",          blog: "epidural" },
+  "pijnstilling":    { nl: "epiduraal",           en: "epidural analgesia",          blog: "epidural" },
+  "kunstverlossing": { nl: "kunstverlossing",     en: "assisted vaginal delivery",   blog: "instrumental birth" },
+  "vroeggeboorte":   { nl: "vroeggeboorte",       en: "preterm birth",               blog: "preterm" },
+  "navelstreng":     { nl: "navelstrengprolaps",  en: "cord prolapse",               blog: "cord prolapse" },
+  "trauma":          { nl: "bevallingstrauma",    en: "birth trauma",                blog: "birth trauma" },
+  "psychisch":       { nl: "bevallingstrauma",    en: "birth trauma",                blog: "birth trauma" },
+  "arom":            { nl: "vliezen breken",      en: "amniotomy",                   blog: "amniotomy" },
+  "vliezen breken":  { nl: "vliezen breken",      en: "amniotomy",                   blog: "amniotomy" },
+  "navelstrengprolaps":{ nl: "navelstrengprolaps",en: "cord prolapse",              blog: "cord prolapse" },
+  "bloedgroep":      { nl: "bloedgroep rhesus",   en: "rhesus incompatibility",      blog: "rhesus" },
+  "gbs infectie":    { nl: "GBS infectie",        en: "group B streptococcus",       blog: "GBS" },
 };
 
 const CAT_BRONNEN = {
@@ -165,11 +170,11 @@ const CAT_BRONNEN = {
     { n:"Podcast Verloskees – VBAC", i:"🎙️", d:"Met gynaecoloog Jan Veerbeek.", u:"https://open.spotify.com/search/verloskees%20VBAC" },
   ],
   "inductie": [
-    { n:"Richtlijnendatabase – Inleiden", i:"📋", d:"NVOG-richtlijn inleiden.", u:"https://richtlijnendatabase.nl/zoeken?q=inleiden" },
+    { n:"Richtlijnendatabase – Inleiden", i:"📋", d:"NVOG-richtlijn inleiden.", u:"https://www.google.com/search?q=site:richtlijnendatabase.nl+inleiden" },
     { n:"Podcast Verloskees – Inleiden", i:"🎙️", d:"Luistertip uit de Dubbel Zen cursusomgeving.", u:"https://open.spotify.com/search/verloskees%20inleiden" },
   ],
   "inleiden": [
-    { n:"Richtlijnendatabase – Inleiden", i:"📋", d:"NVOG-richtlijn inleiden.", u:"https://richtlijnendatabase.nl/zoeken?q=inleiden" },
+    { n:"Richtlijnendatabase – Inleiden", i:"📋", d:"NVOG-richtlijn inleiden.", u:"https://www.google.com/search?q=site:richtlijnendatabase.nl+inleiden" },
     { n:"Podcast Verloskees – Inleiden", i:"🎙️", d:"Luistertip uit de Dubbel Zen cursusomgeving.", u:"https://open.spotify.com/search/verloskees%20inleiden" },
   ],
   "cholestase": [
@@ -194,7 +199,7 @@ const CAT_BRONNEN = {
     { n:"Vraag de Vroedvrouw – Gebroken vliezen", i:"💬", d:"Van Egmond & Van Dijk (2022/2025).", u:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+gebroken+vliezen" },
   ],
   "pre-eclampsie": [
-    { n:"Richtlijnendatabase – Pre-eclampsie", i:"📋", d:"Officiële richtlijn pre-eclampsie en HELLP.", u:"https://richtlijnendatabase.nl/zoeken?q=pre-eclampsie" },
+    { n:"Richtlijnendatabase – Pre-eclampsie", i:"📋", d:"Officiële richtlijn pre-eclampsie en HELLP.", u:"https://www.google.com/search?q=site:richtlijnendatabase.nl+pre-eclampsie" },
   ],
 };
 
@@ -253,11 +258,12 @@ function doSearch() {
   const terms = getTerms(input);
   const enQ = encodeURIComponent(terms.en);
   const nlQ = encodeURIComponent(terms.nl);
+  const blogQ = encodeURIComponent(terms.blog || terms.en);
 
   const RL = [
     { n:"PubMed", i:"🔬", d:"Wetenschappelijke studies en reviews.", u:"https://pubmed.ncbi.nlm.nih.gov/?term="+enQ },
     { n:"Cochrane Library", i:"📊", d:"Systematische reviews van de hoogste bewijskwaliteit.", u:"https://www.cochranelibrary.com/search?q="+enQ },
-    { n:"Richtlijnendatabase.nl", i:"📋", d:"Nederlandse medische richtlijnen.", u:"https://richtlijnendatabase.nl/zoeken?q="+nlQ },
+    { n:"Richtlijnendatabase.nl", i:"📋", d:"Nederlandse medische richtlijnen.", u:"https://www.google.com/search?q=site:richtlijnendatabase.nl+"+nlQ },
     { n:"KNOV", i:"🇳🇱", d:"Richtlijnen en factsheets voor verloskundigen.", u:"https://www.google.com/search?q=site:knov.nl+"+nlQ },
     { n:"NVOG", i:"🏥", d:"Richtlijnen Nederlandse gynaecologen.", u:"https://www.google.com/search?q=site:nvog.nl+"+nlQ },
     { n:"NICE – Maternity", i:"🇬🇧", d:"Britse richtlijnen, gefilterd op zwangerschap en bevalling.", u:"https://www.nice.org.uk/search#q="+enQ+"&nai=Maternity+and+neonatal&sp=on" },
@@ -266,9 +272,9 @@ function doSearch() {
 
   const VD = [
     { n:"Vraag de Vroedvrouw", i:"💬", d:"Nederlandstalige samenvattingen. Gratis leesbaar.", u:"https://www.google.com/search?q=site:vraagdevroedvrouw.nl+"+nlQ },
-    { n:"Rachel Reed", i:"✍️", d:"Australische verloskundige-onderzoeker. Fysiologie en praktijk.", u:"https://www.google.com/search?q=site:rachelreed.website+"+enQ },
-    { n:"Sara Wickham", i:"📖", d:"Britse vroedvrouw en auteur. Kritisch en evidence-based.", u:"https://www.google.com/search?q=site:sarawickham.com+"+enQ },
-    { n:"Evidence Based Birth", i:"🧪", d:"Amerikaanse database met vertaald wetenschappelijk bewijs.", u:"https://www.google.com/search?q=site:evidencebasedbirth.com+"+enQ },
+    { n:"Rachel Reed", i:"✍️", d:"Australische verloskundige-onderzoeker. Fysiologie en praktijk.", u:"https://www.google.com/search?q=site:rachelreed.website+"+blogQ },
+    { n:"Sara Wickham", i:"📖", d:"Britse vroedvrouw en auteur. Kritisch en evidence-based.", u:"https://www.google.com/search?q=site:sarawickham.com+"+blogQ },
+    { n:"Evidence Based Birth", i:"🧪", d:"Amerikaanse database met vertaald wetenschappelijk bewijs.", u:"https://www.google.com/search?q=site:evidencebasedbirth.com+"+blogQ },
   ];
 
   document.getElementById("res-sub").textContent = 'Zoekterm: "' + input + '" — NL: ' + terms.nl + ' | EN: ' + terms.en;
